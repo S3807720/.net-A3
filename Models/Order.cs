@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace LetsShopping.Models
 {
@@ -16,6 +17,8 @@ namespace LetsShopping.Models
         [Required, MaxLength(200)]
         public string DeliveryAddress { get; set; }
         public DateTime? DeliveredDate { get; set; }
+        public int Quantity { get; set; }
+        [JsonIgnore]
         public virtual List<OrderedProducts> Products { get; set; }
     }
 }

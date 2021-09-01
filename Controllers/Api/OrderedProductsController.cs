@@ -3,26 +3,25 @@ using LetsShopping.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LetsShopping.Controllers.Api
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class OrderController : ControllerBase
+    public class OrderedProductsController : ControllerBase
     {
 
         private readonly LetsShoppingContext _context;
 
-        public OrderController(LetsShoppingContext context)
+        public OrderedProductsController(LetsShoppingContext context)
         {
             _context = context;
         }
         [HttpGet]
-        public async Task<IEnumerable<Order>> GetAll()
+        public async Task<IEnumerable<OrderedProducts>> GetAll()
         {
-            return await _context.Orders.ToListAsync();
+            return await _context.OrderedProducts.ToListAsync();
         }
 
     }
