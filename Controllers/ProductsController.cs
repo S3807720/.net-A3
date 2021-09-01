@@ -1,7 +1,7 @@
 ﻿using LetsShopping.Data;
 using LetsShopping.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace LetsShopping.Controllers
@@ -11,10 +11,10 @@ namespace LetsShopping.Controllers
         private readonly LetsShoppingContext _context;
 
         public ProductsController(LetsShoppingContext context) => _context = context;
+
         public async Task<IActionResult> Index()
         {
-            var view = new ProductViewModel();
-            var products = _context.Products.ToList();
+            var products = await _context.Products.ToListAsync();
             return View(products);
         }
     }

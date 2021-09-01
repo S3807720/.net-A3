@@ -19,45 +19,90 @@ namespace LetsShopping.Data
                new Product
                {
                    Name = "Fork",
-                   Description = "Use to eat", 
                    Price = 4.35M
                },
                new Product
                {
                    Name = "Spork",
-                   Description = "Use to eat",
                    Price = 2.35M
                },
                new Product
                {
                    Name = "Jumping Castle",
-                   Description = "Use to jump",
                    Price = 74.35M
                },
                new Product
                {
                    Name = "Banana",
-                   Description = "Eating thing",
                    Price = 0.35M
                },
                new Product
                {
                    Name = "French Onion",
-                   Description = "Use to eat",
                    Price = 1.35M
                },
                new Product
                {
                    Name = "Gold Ingot",
-                   Description = "Use to keep",
                    Price = 752.35M
                },
                new Product
                {
                    Name = "Toy Castle",
-                   Description = "Use to play",
                    Price = 12.55M
                }
+                );
+
+            context.Orders.AddRange(
+              new Order
+              {
+                  OrderID = 1,
+                  OrderDate = DateTime.Now,
+                  CustomerName = "Jeffrey Winger",
+                  DeliveryAddress = "123 Fake St",
+                  DeliveredDate = DateTime.Now.AddDays(5),
+              },
+              new Order
+              {
+                  OrderID = 2,
+                  OrderDate = DateTime.Now,
+                  CustomerName = "Starshine Boatface",
+                  DeliveryAddress = "732 Real St",
+                  DeliveredDate = DateTime.Now.AddDays(15),
+              }
+
+              );
+            context.OrderedProducts.AddRange(
+                new OrderedProducts
+                {
+                    OrderID = 1,
+                    ProductID = 1,
+                    Quantity = 3
+                },
+                new OrderedProducts
+                {
+                    OrderID = 1,
+                    ProductID = 2,
+                    Quantity = 4
+                },
+                new OrderedProducts
+                {
+                    OrderID = 2,
+                    ProductID = 3,
+                    Quantity = 7
+                },
+                new OrderedProducts
+                {
+                    OrderID = 2,
+                    ProductID = 5,
+                    Quantity = 12
+                },
+                new OrderedProducts
+                {
+                    OrderID = 2,
+                    ProductID = 1,
+                    Quantity = 1
+                }
                 );
             context.SaveChanges();
         }

@@ -11,13 +11,13 @@ namespace LetsShopping.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<OrderedProducts> OrderedProducts { get; set; }
-        public DbSet<Orders> Orders { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<OrderedProducts>().HasCheckConstraint("CH_OrderedProducts_Quantity", "Quantity > 0");
+            builder.Entity<OrderedProducts>().HasKey(c => new { c.OrderID, c.ProductID });
         }
 
     }
