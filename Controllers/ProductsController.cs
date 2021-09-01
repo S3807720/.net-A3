@@ -1,7 +1,11 @@
 ﻿using LetsShopping.Data;
 using LetsShopping.Models;
+using LetsShopping.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LetsShopping.Controllers
@@ -40,5 +44,29 @@ namespace LetsShopping.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> OrderedProducts()
+        {
+            var orderedProducts = await _context.OrderedProducts.ToListAsync();
+            List<Product> products = await _context.Products.ToListAsync();
+            return View(new OrderedProductsViewModel {
+                Products = products,
+                OrderedProducts = orderedProducts
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> OrderedProducts(OrderedProductsViewModel vm)
+        {
+            if (vm.ProductID == null)
+            {
+                vm.OrderedProducts = await _context.OrderedProducts.ToListAsync();
+            }
+            else
+            {
+                vm.OrderedProducts = await _context.OrderedProducts.Where(x => x.ProductID == vm.ProductID).ToListAsync();
+            }
+            vm.Products = await _context.Products.ToListAsync();
+            return View(vm);
+        }
     }
 }

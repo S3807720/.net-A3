@@ -1,0 +1,40 @@
+﻿@model LetsShopping.ViewModels.OrderedProductsViewModel
+@{
+    ViewData["Title"] = "Product Page";
+}
+
+<div>
+
+    <h3 class="text-center p-3">Products</h3>
+    <div class="input-group">
+        @using (Html.BeginForm("OrderedProducts", "Products", FormMethod.Post))
+        {
+        <select class="custom-select" asp-for="ProductID" onchange="this.form.submit()">
+            <option>Select a product to filter orders by</option>
+            @foreach (var prod in Model.Products)
+            {
+               <option name="@prod.ProductID" value=@prod.ProductID>@prod.Name</option>
+            }
+        </select>}
+
+    </div>
+    <table class="table">
+        <tr class="row justify-content-md-center">
+            <th class="col"></th>
+            <th class="col">@Html.DisplayNameFor(x => x.OrderedProducts[0].OrderID)</th>
+            <th class="col">@Html.DisplayNameFor(x => x.OrderedProducts[0].Product.Name)</th>
+            <th class="col">@Html.DisplayNameFor(x => x.OrderedProducts[0].Product.Price)</th>
+            <th class="col">@Html.DisplayNameFor(x => x.OrderedProducts[0].Quantity)</th>
+        </tr>
+        @foreach (var product in Model.OrderedProducts)
+        {
+    <tr class="row justify-content-md-center">
+        <td class="col"><img class="col-md-auto" src="~/images/placehold.jpg" alt="placeholder" /></td>
+        <td class="col">@Html.DisplayFor(x => product.OrderID)</td>
+        <td class="col">@Html.DisplayFor(x => product.Product.Name)</td>
+        <td class="col">@Html.DisplayFor(x => product.Product.Price)</td>
+        <td class="col">@Html.DisplayFor(x => product.Quantity)</td>
+    </tr>
+        }
+    </table>
+</div>
